@@ -1,5 +1,0 @@
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=book_production_database
-POSTGRES_USER=book_production_user
-POSTGRES_PASSWORD=uksB55stJkTDFGDFG78978fbnfBVVCBHmalAKgskCJKUT2lO
