@@ -18,8 +18,8 @@ class UserAdmin(BaseUserAdmin):
         "guid",
         # "phone_number",
         # "email",
-        'expiration_time_register',
-        'expiration_time_reset',
+        "expiration_time_register",
+        "expiration_time_reset",
         "profile_picture",
         "first_name",
         # "last_name",
@@ -38,8 +38,8 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "profile_picture",
-                    'expiration_time_register',
-                    'expiration_time_reset',
+                    "expiration_time_register",
+                    "expiration_time_reset",
                     # "first_name",
                     "first_name",
                     # "last_name",
@@ -48,7 +48,7 @@ class UserAdmin(BaseUserAdmin):
                     "gender",
                     "otp",
                     "is_virified",
-                    "activating_code"
+                    "activating_code",
                 )
             },
         ),

@@ -4,12 +4,12 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = 'znf0%dw+9+q8ey-*i)e9g7x+v77e#94&rn*v!%dx+1tshpxke6'
+SECRET_KEY = "znf0%dw+9+q8ey-*i)e9g7x+v77e#94&rn*v!%dx+1tshpxke6"
 
 ALLOWED_HOSTS = ["*"]
 
 DJANGO_APPS = [
-    'modeltranslation',
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -21,7 +21,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
-    'rest_framework_jwt',
+    "rest_framework_jwt",
     "corsheaders",
     "django_extensions",
     "phonenumber_field",
@@ -30,9 +30,8 @@ THIRD_PARTY_APPS = [
     "storages",
     "paycomuz",
     "clickuz",
-    'rest_auth',
-    'drf_yasg',
-
+    "rest_auth",
+    "drf_yasg",
 ]
 
 LOCAL_APPS = [
@@ -88,10 +87,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    #    "rest_framework.authentication.SessionAuthentication",
-       "rest_framework.authentication.BasicAuthentication",
-    #    "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        #    "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        #    "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "main.apps.common.pagination.PageNumberPagination",
     "PAGE_SIZE": 12,
@@ -104,33 +103,46 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
 }
 
+
+# DATABASES = {
+#     "default": {
+#         "NAME": "django.db.backends.sqlite3",
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+#         # "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         # "ENGINE": "django.db.backends.postgresql",
+#         "HOST": os.environ.get("POSTGRES_HOST"),
+#         "NAME": os.environ.get("POSTGRES_DB"),
+#         "PORT": os.environ.get("POSTGRES_PORT"),
+#         "USER": os.environ.get("POSTGRES_USER"),
+#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+#     }
+# }
 
 DATABASES = {
-       "default": {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "book_local_database",
+        "USER": "book_local_user",
+        "PASSWORD": "reTRcHFMKDFG234sdfSDF36AyzQ4",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -149,11 +161,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 gettext = lambda s: s
 LANGUAGES = (
-    ('uz', gettext('Uzbek')),
-    ('ru', gettext('Russian')),
-    ('en', gettext('English')),
+    ("uz", gettext("Uzbek")),
+    ("ru", gettext("Russian")),
+    ("en", gettext("English")),
 )
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_DEFAULT_LANGUAGE = "uz"
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),
@@ -218,26 +230,23 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-
 PAYCOM_SETTINGS = {
-    "TOKEN":"6229ec614fed152a1068002a", #token
+    "TOKEN": "6229ec614fed152a1068002a",  # token
     "KASSA_ID": "6229ec614fed152a1068002a ID",  # kassa id
     "SECRET_KEY": "ZxpiU8EX1e5C0INvP?Y421voIUOirOGEbR71",  # production key
     # "SECRET_KEY": "ZxpiU8EX1e5C0INvP?Y421voIUOirOGEbR71",  # production key
-    "ACCOUNTS": {
-        "KEY": "order_id"
-    }
+    "ACCOUNTS": {"KEY": "order_id"},
 }
 
 
 PAYME_SETTINGS = {
-    'DEBUG':True,   #True - test mode, False - production mode
-    'ID':'6225ed4c06698169c87dab1f',  
-    'SECRET_KEY':'9amoraZORrdn3uy&WdFkYj9j5Ix7JTQIOyd1',
-    'ACCOUNTS':{
-        'KEY_1':'order_id',
-        'KEY_2':'',
-    }
+    "DEBUG": True,  # True - test mode, False - production mode
+    "ID": "6225ed4c06698169c87dab1f",
+    "SECRET_KEY": "9amoraZORrdn3uy&WdFkYj9j5Ix7JTQIOyd1",
+    "ACCOUNTS": {
+        "KEY_1": "order_id",
+        "KEY_2": "",
+    },
 }
 
 PAYME_PRICE_HELPER = 100
@@ -250,10 +259,10 @@ CLICK_SETTINGS = {
     "secret_key": os.environ.get("CLICK_SECRET_KEY"),
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'liber.info.uz@gmail.com'
-EMAIL_HOST_PASSWORD = 'wrbbcmkgsuhxglud'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "liber.info.uz@gmail.com"
+EMAIL_HOST_PASSWORD = "wrbbcmkgsuhxglud"
 EMAIL_PORT = 587
