@@ -279,3 +279,4 @@ static/
 .env
 /env
 env
+.envs
