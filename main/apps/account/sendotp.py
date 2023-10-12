@@ -48,14 +48,14 @@ def send_password_as_sms(username):
     user_otp.save()
     client = SMSClient(
         api_url = "https://notify.eskiz.uz/api/",
-        email = "test@eskiz.uz",
-        password = "j6DWtQjjpLDNjWEk74Sx"
+        email = "burixonzoda.nusratullo@gmail.com",
+        password = "i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
     )
     resp = client._send_sms(
         phone_number=str(user_phone_number),
-        message=f"Your otp is {otp}" 
+        message=f"Your otp is {otp}"
     )
-    pprint(resp)
+    print(resp)
 
 # def send_password_as_sms(username):
 #     user_phone_number = User.objects.get(username=username).username
@@ -92,7 +92,7 @@ def send_password_as_sms(username):
     # requests.post(url, data=json.dumps(data), timeout=5)
 
 # from shared import rdb
-# send_sms_api = "https://notify.eskiz.uz/api/message/sms/send" 
+# send_sms_api = "https://notify.eskiz.uz/api/message/sms/send"
 
 # def send_password_as_sms(data):
 #     # while not rdb.get('eskiz_token'):
@@ -129,8 +129,8 @@ def password_reset_verification_code_by_phone_number(username):
         # email = "test@eskiz.uz",
         # password = "j6DWtQjjpLDNjWEk74Sx"
         api_url = "https://notify.eskiz.uz/api/",
-        email = "liber.info.uz@gmail.com",
-        password = "fs7Ue6OFmzSJ7K6ML309lWizYdM6tB51k6Sl2BfB"
+        email = "burixonzoda.nusratullo@gmail.com",
+        password = "i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
     )
     resp = client._send_sms(
         phone_number=str(user_phone_number),
@@ -174,7 +174,7 @@ def password_reset_verification_code_by_email(username):
         [user_email]
     )
     email.send()
-    
+
     return Response(status=200)
 
 
