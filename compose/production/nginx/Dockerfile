@@ -24,4 +24,3 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY ./.envs/.production/nginx.conf /etc/nginx/conf.d
 
 
-

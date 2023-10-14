@@ -120,17 +120,26 @@ SIMPLE_JWT = {
 
 # DATABASES = {
 #     "default": {
-#         "NAME": "django.db.backends.sqlite3",
-#         # 'NAME': BASE_DIR / 'db.sqlite3',
-#         # "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         # "ENGINE": "django.db.backends.postgresql",
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
 #         "HOST": os.environ.get("POSTGRES_HOST"),
 #         "NAME": os.environ.get("POSTGRES_DB"),
 #         "PORT": os.environ.get("POSTGRES_PORT"),
 #         "USER": os.environ.get("POSTGRES_USER"),
-#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+#         "PASSWORD": os.environ.get("reTRcHFMKDFG234sdfSDF36AyzQ4"),
 #     }
 # }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": "localhost",
+#         "NAME": "zukko_local_database",
+#         "PORT": "5432",
+#         "USER": "zukko_local_user",
+#         "PASSWORD": "reTRcHFMKDFG234sdfSDF36AyzQ4",
+#     }
+# }
+
 
 DATABASES = {
     "default": {
