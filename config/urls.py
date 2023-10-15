@@ -21,6 +21,8 @@ from rest_framework_swagger.views import get_swagger_view
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 # swagger_schema_view = get_swagger_view(title="Book E-commerce platform")
@@ -29,9 +31,9 @@ schema_view = get_schema_view(
     openapi.Info(
     title="Swagger Doc for Liber",
     default_version='v1',
-    description="This is Liber project API",
-    terms_of_service="liber.uz",
-    contact=openapi.Contact(email="example@gmail.com"),
+    description="This is Zukko project API",
+    terms_of_service="zukko.uz",
+    contact=openapi.Contact(email="burixonzoda.nusratullo@gmail.com"),
     ),
     permission_classes=(permissions.IsAuthenticatedOrReadOnly,),
     public=True,
@@ -49,8 +51,6 @@ urlpatterns = [
     ),
 ]
 
-from django.conf import settings
-from django.conf.urls.static import static
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

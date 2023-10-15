@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from datetime import datetime, timedelta
 from django.contrib.auth.hashers import make_password
 
+from ..utils import generate_random_password
 from ...common import permissions
 from ..serializers import user as user_serializer_
 # from ..utils import generate_random_password, send_password_as_sms
@@ -15,10 +16,10 @@ from ..serializers import user as user_serializer_
 from ...account.sendotp import (
     # send_sms_code, 
     send_password_as_sms,
-    password_reset_verification_code_by_phone_number, 
+    password_reset_verification_code_by_phone_number,
     send_otp_to_email,
     password_reset_verification_code_by_email
-) 
+)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -64,7 +65,7 @@ class UserGeneratePasswordAPIView(APIView):
                 password=password,
             )
 
-        send_password_as_sms(phone_number, password)
+        send_password_as_sms(phone_number)
         return Response(
             status=status.HTTP_200_OK,
             data={
@@ -129,7 +130,6 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 user_update_api_view = UserUpdateAPIView.as_view()
 
 
-
 class AuthUserRegistrationView(generics.GenericAPIView):
     serializer_class = user_serializer_.UserRegistrationSerializer
     queryset = User.objects.all()
@@ -145,19 +145,18 @@ class AuthUserRegistrationView(generics.GenericAPIView):
                 send_password_as_sms(serializer.data['username'])
             elif "@" in serializer.data['username']:
                 send_otp_to_email(serializer.data['username'])
-            status_code = status.HTTP_201_CREATED 
+            status_code = status.HTTP_201_CREATED
             response = {
                 'success': True,
                 'statusCode': status_code,
-                'message': 'User succesfully registered',
+                'message': 'User successfully registered',
                 'user': serializer.data
             }
-            
+
             return Response(response, status=status_code)
 
+
 user_registration_api_view = AuthUserRegistrationView.as_view()
-
-
 
 
 class ResendOtpToPhoneNumberAPIView(generics.GenericAPIView):
@@ -165,7 +164,7 @@ class ResendOtpToPhoneNumberAPIView(generics.GenericAPIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        data = request.data 
+        data = request.data
         username = data['username']
         try:
             user = User.objects.get(username=username)
@@ -178,12 +177,11 @@ class ResendOtpToPhoneNumberAPIView(generics.GenericAPIView):
             elif "@" in data['username']:
                 send_otp_to_email(data['username'])
         except User.DoesNotExist:
-            return Response('User does not exits')            
+            return Response('User does not exits')
         return Response('OTP resent successfully')
-            
+
+
 user_resend_otp_api_view = ResendOtpToPhoneNumberAPIView.as_view()
-
-
 
 
 class AuthUserLoginView(generics.GenericAPIView):
@@ -209,11 +207,13 @@ class AuthUserLoginView(generics.GenericAPIView):
 
             return Response(response, status=status_code)
 
+
 user_login_api_view = AuthUserLoginView.as_view()
 
 
 class VerifyPhoneOTP(generics.GenericAPIView):
     serializer_class = user_serializer_.VerifySerializer
+
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -224,7 +224,7 @@ class VerifyPhoneOTP(generics.GenericAPIView):
                 if user.otp != otp:
                     return Response({
                         'status': 400,
-                        'message': 'Something went worng',
+                        'message': 'Something went wrong',
                         'data': 'Wrong otp'
                     })
                 dates = str(datetime.now().strftime('%H:%M:%S'))
@@ -256,8 +256,6 @@ class VerifyPhoneOTP(generics.GenericAPIView):
 user_otp_verify_api_view = VerifyPhoneOTP.as_view()
 
 
-
-
 class PasswordResetAPIView(generics.GenericAPIView):
     serializer_class = user_serializer_.PasswordResetSerializer
     permission_classes = (AllowAny,)
@@ -266,7 +264,7 @@ class PasswordResetAPIView(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 
-        data = request.data 
+        data = request.data
         username = data['username']
 
         if valid:
@@ -279,7 +277,8 @@ class PasswordResetAPIView(generics.GenericAPIView):
                     password_reset_verification_code_by_email(serializer.data['username'])
                 status_code = status.HTTP_201_CREATED
             except User.DoesNotExist:
-                return Response({'status':'error','message':'User does not exits'}, status=status.HTTP_400_BAD_REQUEST) 
+                return Response({'status': 'error', 'message': 'User does not exits'},
+                                status=status.HTTP_400_BAD_REQUEST)
             response = {
                 'success': True,
                 'statusCode': status_code,
@@ -288,8 +287,9 @@ class PasswordResetAPIView(generics.GenericAPIView):
             }
             return Response(response, status=status_code)
 
+
 password_reset_api_view = PasswordResetAPIView.as_view()
-             
+
 
 class PasswordResetCodeCheckView(generics.GenericAPIView):
     serializer_class = user_serializer_.PasswordResetCodeCheckSerializer
@@ -297,7 +297,7 @@ class PasswordResetCodeCheckView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         dates = str(datetime.now().strftime('%H:%M:%S'))
-        serializer = self.get_serializer(data=request.data)                                                     
+        serializer = self.get_serializer(data=request.data)
         valid = serializer.is_valid(raise_exception=False)
         if valid:
             try:
@@ -308,15 +308,14 @@ class PasswordResetCodeCheckView(generics.GenericAPIView):
                         'message': "Code vaqti tugagan, qayta code jo'nating!",
                     })
                 else:
-                    return Response({'status':'success','message':"Code tastiqlandi!"}, status=status.HTTP_200_OK)
+                    return Response({'status': 'success', 'message': "Code tastiqlandi!"}, status=status.HTTP_200_OK)
             except:
-                return Response({'status':'error','message':"Sizga xozir jo'natilgan code ni kiriting!"}, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'status':'error','message':"Serializer not valid!!"}, status=status.HTTP_400_BAD_REQUEST)
-
+                return Response({'status': 'error', 'message': "Sizga xozir jo'natilgan code ni kiriting!"},
+                                status=status.HTTP_400_BAD_REQUEST)
+        return Response({'status': 'error', 'message': "Serializer not valid!!"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 password_reset_check_view = PasswordResetCodeCheckView.as_view()
-
 
 
 class PasswordResetConfirmView(generics.GenericAPIView):
@@ -327,20 +326,20 @@ class PasswordResetConfirmView(generics.GenericAPIView):
     serializer_class = user_serializer_.PasswordResetConfirmSerializer
     permission_classes = (AllowAny,)
 
-
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        
-        data = request.data 
+
+        data = request.data
         username = data['username']
 
         if serializer.is_valid(raise_exception=False):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                return Response('User does not exits') 
+                return Response('User does not exits')
             if serializer.data['new_password1'] != serializer.data['new_password2']:
-                return Response({'status': False, 'message':"two fields should be the same!"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'status': False, 'message': "two fields should be the same!"},
+                                status=status.HTTP_400_BAD_REQUEST)
             else:
                 UserModel = get_user_model()
                 user = UserModel.objects.get(username=serializer.data['username'])
@@ -348,7 +347,9 @@ class PasswordResetConfirmView(generics.GenericAPIView):
                 user.save()
                 return Response({"message": "Password successfully updated"}, status=status.HTTP_200_OK)
         else:
-            return Response({'status': False, 'message': 'The entered password is incorrect', 'data': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'status': False, 'message': 'The entered password is incorrect', 'data': serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST)
 
 
 password_reset_confirm_view = PasswordResetConfirmView.as_view()
@@ -356,24 +357,27 @@ password_reset_confirm_view = PasswordResetConfirmView.as_view()
 
 class PasswordChangeView(generics.GenericAPIView):
     serializer_class = user_serializer_.PasswordChangeSerializer
+
     # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=False):
             if serializer.data['new_password1'] != serializer.data['new_password2']:
-                return Response({'status': 'error', 'message': _("PThese two fields should be the same!")}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'status': 'error', 'message': _("PThese two fields should be the same!")},
+                                status=status.HTTP_400_BAD_REQUEST)
             user = request.user
             if user.check_password(serializer.data['old_password']):
                 user.set_password(serializer.data['new_password1'])
                 user.save()
                 return Response({"message": _("Password successfully updated")}, status=status.HTTP_200_OK)
             else:
-                return Response({'status': 'error', 'message': _('Password is incorrect')}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'status': 'error', 'message': _('Password is incorrect')},
+                                status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'status': 'error', 'message': _('This phone number does not exist'), 'data': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'status': 'error', 'message': _('This phone number does not exist'), 'data': serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST)
+
 
 password_change_view = PasswordChangeView.as_view()
-
-
-
