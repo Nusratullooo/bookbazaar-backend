@@ -43,22 +43,38 @@ ONLINE = settings.ONLINE
 AUDIO = settings.AUDIO
 PAPER = settings.PAPER
 
+class CoverTypeChoices(models.TextChoices):
+     Wire_cover = 'Wire cover'
+     Soft_cover = 'Soft cover'
+     Hard_cover = 'Hard cover'
+
+
+class LanguageTypeChoices(models.TextChoices):
+    Uzbek = 'Uzbek'
+    Russia = 'Russia'
+    English = 'English'
 
 class Book(BaseModel):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title', null=True)
     author = models.CharField(max_length=255, blank=True)
+    annotation = models.TextField(blank=True)
     thumbnail = models.ImageField(blank=True, upload_to=upload_book_cover)
     category = models.ForeignKey(
         "category.Category", on_delete=models.CASCADE, related_name="books"
     )
-    language = models.CharField(max_length=255, blank=True)
+    language = models.CharField(max_length=100, choices=LanguageTypeChoices.choices, default=LanguageTypeChoices.Uzbek)
+    color = models.PositiveIntegerField(blank=True)
     number_of_page = models.PositiveIntegerField(null=True)
+    age = models.CharField(max_length=100, null=True)
     hardcover = models.BooleanField(default=False)
     isbn = models.CharField(max_length=100, null=True, blank=True)
+    format = models.CharField(max_length=100, blank=True)
     publisher = models.CharField(max_length=100, null=True, blank=True)
+    cover_type = models.CharField(max_length=100, choices=CoverTypeChoices.choices, default=CoverTypeChoices.Wire_cover)
     short_description = models.TextField(blank=True)
     published_date = models.CharField(max_length=10, null=True, blank=True)
+    paper = models.TextField(blank=True)
     owner = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
