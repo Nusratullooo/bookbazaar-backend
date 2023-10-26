@@ -125,30 +125,25 @@ SIMPLE_JWT = {
 #         "NAME": os.environ.get("POSTGRES_DB"),
 #         "PORT": os.environ.get("POSTGRES_PORT"),
 #         "USER": os.environ.get("POSTGRES_USER"),
-#         "PASSWORD": os.environ.get("reTRcHFMKDFG234sdfSDF36AyzQ4"),
+#         "PASSWORD": os.environ.get("POSTGRES_USER"),
 #     }
 # }
 
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "HOST": "localhost",
-#         "NAME": "zukko_local_database",
-#         "PORT": "5432",
-#         "USER": "zukko_local_user",
-#         "PASSWORD": "reTRcHFMKDFG234sdfSDF36AyzQ4",
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'zukko_local_database',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         'USER': 'zukko_local_user',
+#         'PASSWORD': 'reTRcHFMKDFG234sdfSDF36AyzQ4',
 #     }
 # }
 
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "book_local_database",
-        "USER": "book_local_user",
-        "PASSWORD": "reTRcHFMKDFG234sdfSDF36AyzQ4",
-        "HOST": "localhost",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -240,9 +235,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 PAYCOM_SETTINGS = {
-    "TOKEN": "6229ec614fed152a1068002a",  # token
-    "KASSA_ID": "6229ec614fed152a1068002a ID",  # kassa id
-    "SECRET_KEY": "ZxpiU8EX1e5C0INvP?Y421voIUOirOGEbR71",  # production key
+    "TOKEN": "019b49bc966cbcaf7cdfdd3a850ec1611ff59a9a",  # token
+    "KASSA_ID": "6524f71f3641b16407149552",  # kassa id
+    "SECRET_KEY": "jcgI#wdIMNuDZTRI4Ko5EPD?xNmsBrZ5y3?&",  # production key
     # "SECRET_KEY": "ZxpiU8EX1e5C0INvP?Y421voIUOirOGEbR71",  # production key
     "ACCOUNTS": {"KEY": "order_id"},
 }
@@ -250,11 +245,13 @@ PAYCOM_SETTINGS = {
 
 PAYME_SETTINGS = {
     "DEBUG": True,  # True - test mode, False - production mode
-    "ID": "6225ed4c06698169c87dab1f",
-    "SECRET_KEY": "9amoraZORrdn3uy&WdFkYj9j5Ix7JTQIOyd1",
+    "ID": "652662c83b436631776bf60f",
+    "SECRET_KEY": "j3dOiNDGafsaT53xeN?@V9ptts017IQyuh?%",
+    "return_url": "https://fa05-82-215-106-101.ngrok-free.app/api/v1/transaction/integration_with_payme/",
     "ACCOUNTS": {
-        "KEY_1": "order_id",
-        "KEY_2": "",
+        "KEY": "order_id",
+        # "KEY_1": "order_id",
+        # "KEY_2": "",
     },
 }
 

@@ -11,15 +11,18 @@ KEY = settings.PAYCOM_SETTINGS['ACCOUNTS']['KEY']
 
 
 class PayComResponse(object):
-    LINK = 'https://checkout.paycom.uz'
+    # LINK = 'https://checkout.paycom.uz'
+    # LINK = 'https://checkout.test.paycom.uz'
+    LINK = 'https://test.paycom.uz'
 
     def create_initialization(self, amount: Decimal, order_id: str, return_url: str) -> str:
         """
 
         documentation : https://help.paycom.uz/ru/initsializatsiya-platezhey/otpravka-cheka-po-metodu-get
 
-        >>> self.create_initialization(amount=Decimal(5000.00), order_id='1', return_url='https://example.com/success/')
+        # >>> self.create_initialization(amount=Decimal(1), order_id='1', return_url='https://fa05-82-215-106-101.ngrok-free.app/api/v1/transaction/integration_with_payme/success/')
         """
+
         params = f"m={TOKEN};ac.{KEY}={order_id};a={amount};c={return_url}"
         encode_params = base64.b64encode(params.encode("utf-8"))
         encode_params = str(encode_params, 'utf-8')

@@ -37,7 +37,7 @@ class BookCreateSerializer(serializers.ModelSerializer):
             "color",
             "number_of_page",
             "age",
-            "hardcover",
+            # "hardcover",
             "isbn",
             "format",
             "publisher",
@@ -77,7 +77,7 @@ class BookCreateSerializer(serializers.ModelSerializer):
 
 class BookListForBookTypeSerializer(serializers.ModelSerializer):
     category = serializers.ReadOnlyField(source='category.title')
-    created_at = serializers.DateTimeField('%Y-%m-%d, %X' )
+    created_at = serializers.DateTimeField('%Y-%m-%d, %X')
     rating = serializers.IntegerField(default=0)
     class Meta:
         model = Book
@@ -92,7 +92,7 @@ class BookListForBookTypeSerializer(serializers.ModelSerializer):
             'category',
             'language',
             "color",
-            "hardcover",
+            # "hardcover",
             "number_of_page",
             "age",
             "publisher",
@@ -130,7 +130,7 @@ class BookListSerializer(serializers.ModelSerializer):
             'category_ru',
             'language',
             "number_of_page",
-            "hardcover",
+            # "hardcover",
             "publisher",
             "isbn",
             'short_description',
@@ -165,7 +165,7 @@ class BookDetailSerializer(serializers.ModelSerializer):
             "category",
             "language",
             'color',
-            "hardcover",
+            # "hardcover",
             "number_of_page",
             'age',
             "publisher",
@@ -214,7 +214,7 @@ class BookUpdateSerializer(serializers.ModelSerializer):
             "category",
             "language",
             'color',
-            "hardcover",
+            # "hardcover",
             "number_of_page",
             'age',
             "publisher",
@@ -235,15 +235,24 @@ class BookUpdateSerializer(serializers.ModelSerializer):
         types = (instance.types).all()
         types = list(types)
         instance.title = validated_data.get('title', instance.title)
+        instance.author = validated_data.get('author', instance.author)
+        instance.category = validated_data.get('category', instance.category)
+        instance.annotation = validated_data.get('annotation', instance.annotation)
+        instance.color = validated_data.get('color', instance.color)
+        instance.age = validated_data.get('age', instance.age)
+        instance.format = validated_data.get('format', instance.format)
+        instance.paper = validated_data.get('paper', instance.paper)
         instance.short_description = validated_data.get('short_description', instance.short_description)
         instance.short_description_uz = validated_data.get('short_description_uz', instance.short_description_uz)
         instance.short_description_ru = validated_data.get('short_description_ru', instance.short_description_ru)
+        # instance.short_description_en = validated_data.get('short_description_en', instance.short_description_en)
         instance.published_date = validated_data.get('published_date', instance.published_date)
         instance.thumbnail = validated_data.get('thumbnail', instance.thumbnail)
         instance.language = validated_data.get('language', instance.language)
         instance.isbn = validated_data.get('isbn', instance.isbn)
+        instance.cover_type = validated_data.get('cover_type', instance.cover_type)
         instance.publisher = validated_data.get('publisher', instance.publisher)
-        instance.hardcover = validated_data.get('hardcover', instance.hardcover)
+        # instance.hardcover = validated_data.get('hardcover', instance.hardcover)
         instance.number_of_page = validated_data.get('number_of_page', instance.number_of_page)
         instance.save()
 

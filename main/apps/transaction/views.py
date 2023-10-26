@@ -19,14 +19,14 @@ from clickuz import ClickUz
 
 
 from rest_framework_simplejwt import authentication
-from rest_framework import permissions
+# from rest_framework import permissions
 
 converter_amount = settings.PAYME_PRICE_HELPER
 converter_amount_click = settings.CLICK_PRICE_HELPER
 
 
 class InitializePaymentAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated,]
     authentication_classes = [authentication.JWTAuthentication]
     serializer_class = serializers.InitializePaymentSerializer
 
@@ -56,14 +56,14 @@ class InitializePaymentAPIView(APIView):
             generated_link = Paycom().create_initialization(
                 price,
                 transaction_id,
-                return_url="https://liber.uz/login/",
+                return_url="fa05-82-215-106-101.ngrok-free.app/api-auth/login",
             )
         elif transaction_type == TRANSACTIONTYPECHOICES.CLICK:
             price = price * converter_amount_click
             generated_link = ClickUz.generate_url(
                 order_id=transaction_id,
                 amount=price,
-                return_url="https://liber.uz/login/",
+                return_url="https://fa05-82-215-106-101.ngrok-free.app/login",
                 )
         return Response(
             status=status.HTTP_200_OK,

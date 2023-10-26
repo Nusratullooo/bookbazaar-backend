@@ -49,6 +49,8 @@ class CategoryUpdateSerializer(serializers.ModelSerializer):
         types = list(types)
         instance.thumbnail = validated_data.get('thumbnail', instance.thumbnail)
         instance.title = validated_data.get('title', instance.title)
+        instance.title_ru = validated_data.get('title_ru', instance.title_ru)
+        instance.title_uz = validated_data.get('title_uz', instance.title_uz)
         instance.save()
 
         for type_data in types_data:
