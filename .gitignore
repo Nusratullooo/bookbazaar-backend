@@ -5,7 +5,7 @@ pycache/
 *$py.class
 
 local.yml
-db.sqlite3
+
 # C extensions
 *.so
 
@@ -271,7 +271,7 @@ tags
 ### Project template
 
 
-static/
+
 
 .pytest_cache/
 
