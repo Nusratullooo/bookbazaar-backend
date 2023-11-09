@@ -27,7 +27,7 @@ urlpatterns = [
 
     path('user-login/', user.MyObtainTokenPairView.as_view(), name='user-login'),
 
-    path('verify-phone/', user.user_otp_verify_api_view, name='verify-phone'),
+    path('verify-phone/', user.user_otp_verify_api_view, name='verify-phhone'),
 
     path('password-reset/', user.password_reset_api_view, name='password-reset'),
     path('password-reset-check/', user.password_reset_check_view, name='password-reset-check'),

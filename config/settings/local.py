@@ -1,4 +1,5 @@
 from .base import *  # noqa
 
-ALLOWED_HOSTS = ["*"]
-DEBUG = True
+# ALLOWED_HOSTS = ["bookbazaar-api.uz"]
+#
+# DEBUG = False

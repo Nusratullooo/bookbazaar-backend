@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password
 from ..utils import generate_random_password
 from ...common import permissions
 from ..serializers import user as user_serializer_
-# from ..utils import generate_random_password, send_password_as_sms
+# from .utils import generate_random_password, send_password_as_sms
 
 from ...account.sendotp import (
     # send_sms_code, 
@@ -28,8 +28,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from main.apps.account import serializers
 
-User = get_user_model()
-
+# User = get_user_model()
+from ..models import User
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)

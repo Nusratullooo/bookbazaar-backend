@@ -2,11 +2,18 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
+from environs import Env
+env = Env()
+env.read_env()
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = "znf0%dw+9+q8ey-*i)e9g7x+v77e#94&rn*v!%dx+1tshpxke6"
+SECRET_KEY = env.str("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
+DEBUG = False
+
+ALLOWED_HOSTS = ["bookbazaar.uz"]
 
 DJANGO_APPS = [
     "modeltranslation",
@@ -88,8 +95,8 @@ REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        #    "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
+        #    "rest_framework.authentication.SessionAuthentication",
         #    "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "main.apps.common.pagination.PageNumberPagination",
@@ -142,8 +149,12 @@ SIMPLE_JWT = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": 'django.db.backends.postgresql',
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "PORT": "5432",
     }
 }
 
@@ -202,8 +213,12 @@ AUDIO = "audio"
 PERMANENT = "permanent"
 TEMPORARY = "temporary"
 
+# ESKIZ-SMS SETTING ↓
+
 SMS_TOKEN = os.environ.get("SMS_TOKEN")
 SMS_DOMAIN = os.environ.get("SMS_DOMAIN")
+
+# AWS SETTING ↓
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -223,6 +238,7 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
+
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -231,8 +247,10 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
 CORS_ALLOW_ALL_ORIGINS = True
 
+# PAYCOM SETTING ↓
 
 PAYCOM_SETTINGS = {
     "TOKEN": "019b49bc966cbcaf7cdfdd3a850ec1611ff59a9a",  # token
@@ -242,6 +260,7 @@ PAYCOM_SETTINGS = {
     "ACCOUNTS": {"KEY": "order_id"},
 }
 
+# PAYME SETTING ↓
 
 PAYME_SETTINGS = {
     "DEBUG": True,  # True - test mode, False - production mode
@@ -256,7 +275,8 @@ PAYME_SETTINGS = {
 }
 
 PAYME_PRICE_HELPER = 100
-CLICK_PRICE_HELPER = 1
+
+# CLICK SETTING ↓
 
 CLICK_SETTINGS = {
     "service_id": os.environ.get("CLICK_SERVICE_ID"),
@@ -264,6 +284,10 @@ CLICK_SETTINGS = {
     "merchant_user_id": os.environ.get("CLICK_MERCHANT_USER_ID"),
     "secret_key": os.environ.get("CLICK_SECRET_KEY"),
 }
+
+CLICK_PRICE_HELPER = 1
+
+# EMAIL SETTING ↓
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
