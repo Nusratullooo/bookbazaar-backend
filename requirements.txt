@@ -1,0 +1,40 @@
+# Python
+whitenoise==5.3.0 # https://pypi.org/project/whitenoise/
+pre-commit==2.15.0 # https://pre-commit.com/
+Pillow==8.4.0
+
+
+
+# Django
+Django==3.2.9
+django-extensions==3.1.5 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html
+django-cors-headers==3.10.0 # https://pypi.org/project/django-cors-headers/
+django-phonenumber-field==6.0.0 # https://pypi.org/project/django-phonenumber-field/
+phonenumbers==8.12.38 # https://pypi.org/project/phonenumbers/
+django-rest-swagger==2.2.0 # https://django-rest-swagger.readthedocs.io/en/latest/
+django-storages==1.12.3 #https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#
+boto3== 1.20.46 # https://pypi.org/project/boto3/
+django-autoslug==1.9.8
+django-modeltranslation==0.18.2
+djangorestframework-simplejwt==5.2.0
+django-rest-auth==0.9.5
+djangorestframework-jwt
+twilio==7.12.0
+drf-yasg==1.21.3
+eskiz-pkg==1.1
+
+
+
+
+# Rest Framework
+djangorestframework==3.12.4 # https://www.django-rest-framework.org/
+django-filter==21.1
+PaycomUz==3.0 #https://github.com/begyy/PaycomUz
+ClickUz==0.3 # https://github.com/begyy/ClickUz
+
+
+# Postgres
+psycopg2-binary==2.9.2 # https://pypi.org/project/psycopg2-binary/
+
+# Gunicorn
+gunicorn==20.1.0  # https://docs.gunicorn.org/en/stable/
