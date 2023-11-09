@@ -29,10 +29,10 @@ from django.conf.urls.static import static
 
 schema_view = get_schema_view(
     openapi.Info(
-    title="Swagger Doc for Liber",
+    title="Swagger Doc for BOOKBAZAAR",
     default_version='v1',
-    description="This is Zukko project API",
-    terms_of_service="zukko.uz",
+    description="This is BOOKBAZAAR project API",
+    terms_of_service="bookbazaar-api.uz",
     contact=openapi.Contact(email="burixonzoda.nusratullo@gmail.com"),
     ),
     permission_classes=(permissions.IsAuthenticatedOrReadOnly,),

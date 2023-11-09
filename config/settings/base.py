@@ -13,7 +13,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["bookbazaar.uz"]
+ALLOWED_HOSTS = ["bookbazaar-api.uz"]
 
 DJANGO_APPS = [
     "modeltranslation",
