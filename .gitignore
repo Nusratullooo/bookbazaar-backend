@@ -276,7 +276,3 @@ static/
 .pytest_cache/
 
 .ipython/
-.env
-/env
-env
-.envs

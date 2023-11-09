@@ -16,7 +16,7 @@ RUN apt-get update \
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
-RUN pip install -r /requirements/local.txt
+RUN pip install -r /requirements.txt
 
 
 COPY ./compose/local/start /start
