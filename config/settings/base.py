@@ -201,26 +201,12 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# MEDIA_URL = "/media/"
+STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
+
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, "main", "static_files"),)
 MEDIA_ROOT = os.path.join(BASE_DIR, "main", "media/")
-# STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
-
-STATIC_URL = "/static/"
-
-if DEBUG:
-    STATIC_DIR = os.path.join(BASE_DIR, "static")
-    STATICFILES_DIRS = [
-        STATIC_DIR,
-        '/var/www/',
-    ]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
-    STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    )
+STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
 
 ONLINE = "online"
 PAPER = "paper"
