@@ -13,7 +13,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["bookbazaar-api.uz", "bookbazaar.uz", "bookbazaar-dashboard.uz"]
+ALLOWED_HOSTS = ["bookbazaar-api.uz", "161.35.201.75", "bookbazaar.uz", "bookbazaar-dashboard.uz"]
 
 DJANGO_APPS = [
     "modeltranslation",
@@ -197,7 +197,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = "/static/"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -205,7 +205,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, "main", "static_files"),)
 MEDIA_ROOT = os.path.join(BASE_DIR, "main", "media/")
-STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
+# STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
+
+STATIC_URL = "/static/"
+
+if DEBUG:
+    STATIC_DIR = os.path.join(BASE_DIR, "static")
+    STATICFILES_DIRS = [
+        STATIC_DIR,
+        '/var/www/',
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "main", "static/")
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    )
 
 ONLINE = "online"
 PAPER = "paper"
