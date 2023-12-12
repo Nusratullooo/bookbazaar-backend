@@ -242,15 +242,15 @@ class VerifyPhoneOTP(generics.GenericAPIView):
                         'status': 200,
                         'message': 'Account virified'
                     })
-            # return Response({
-            #     'status': 400,
-            #     'message': 'Bunday account mavjud emas!'
-            # })
-        else:
             return Response({
                 'status': 400,
                 'message': 'Bunday account mavjud emas!'
             })
+        # else:
+        #     return Response({
+        #         'status': 400,
+        #         'message': 'Bunday account mavjud emas!'
+        #     })
 
 
 user_otp_verify_api_view = VerifyPhoneOTP.as_view()
