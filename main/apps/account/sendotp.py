@@ -47,9 +47,9 @@ def send_password_as_sms(username):
     user_otp.otp = otp
     user_otp.save()
     client = SMSClient(
-        api_url = "https://notify.eskiz.uz/api/",
-        email = "burixonzoda.nusratullo@gmail.com",
-        password = "i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
+        api_url="https://notify.eskiz.uz/api/",
+        email="burixonzoda.nusratullo@gmail.com",
+        password="i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
     )
     resp = client._send_sms(
         phone_number=str(user_phone_number),
@@ -128,13 +128,13 @@ def password_reset_verification_code_by_phone_number(username):
     client = SMSClient(
         # email = "test@eskiz.uz",
         # password = "j6DWtQjjpLDNjWEk74Sx"
-        api_url = "https://notify.eskiz.uz/api/",
-        email = "burixonzoda.nusratullo@gmail.com",
-        password = "i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
+        api_url="https://notify.eskiz.uz/api/",
+        email="burixonzoda.nusratullo@gmail.com",
+        password="i3wlzbBJ5FnVtO6itVUYVGMCo6cbHJM5Jk3v7ciF"
     )
     resp = client._send_sms(
         phone_number=str(user_phone_number),
-        message=f"Your confrim code is {resetting_code}" 
+        message=f"Your confrim code is {resetting_code}"
     )
     print(resp)
     return Response(status=200)
@@ -176,7 +176,3 @@ def password_reset_verification_code_by_email(username):
     email.send()
 
     return Response(status=200)
-
-
-
-
